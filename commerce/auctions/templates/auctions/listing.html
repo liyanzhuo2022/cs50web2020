@@ -1,0 +1,72 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>{{ listing.title }}</h2>
+    <p>{{ listing.description }}</p>
+    <p>Current Price: ${{ listing.price }}</p>
+    {% if listing.image %}
+        <img src="{{ listing.image }}" alt="{{ listing.title }}" style="max-width: 400px;">
+    {% endif %}
+    {% if listing.category %}
+        <p>Category: {{ listing.category.name }}</p>
+    {% endif %}
+    <p>Seller: {{ listing.seller.username }}</p>
+    <p>Created at: {{ listing.time }}</p>
+    <p>Status: {% if listing.status %}Active{% else %}Inactive{% endif %}</p>
+    
+    {% if user.is_authenticated %}
+        {% if user == listing.seller and listing.status %}
+            <form action="{% url 'close_auction' listing.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Close Auction</button>
+            </form>
+        {% endif %}
+        {% if not listing.status and user == listing.winner %}
+            <p>Congratulations! You won this auction.</p>
+        {% endif %}
+        <form action="{% url 'toggle_watchlist' listing.id %}" method="post">
+            {% csrf_token %}
+            {% if on_watchlist %}
+                <button type="submit">Remove from Watchlist</button>
+            {% else %}
+                <button type="submit">Add to Watchlist</button>
+            {% endif %}
+        </form>
+        <a href="{% url 'watchlist' %}">View Your Watchlist</a>
+        
+        <h3>Place a Bid</h3>
+        <form action="{% url 'submit_bid' listing.id %}" method="post">
+            {% csrf_token %}
+            {{ bid_form.as_p }}
+            <button type="submit">Place Bid</button>
+        </form>
+        
+        <h3>Post a Comment</h3>
+        <form action="{% url 'submit_comment' listing.id %}" method="post">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit">Post Comment</button>
+        </form>
+        
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+    
+    <h3>Comments</h3>
+    <div class="comments">
+        {% for comment in comments %}
+            <div class="comment">
+                <p><strong>{{ comment.user.username }}</strong>: {{ comment.comment }}</p>
+                <p>Posted at: {{ comment.time }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <br>
+    <a href="{% url 'index' %}">Back</a>
+{% endblock %}

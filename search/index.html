@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="links">
+            <!-- add links to google image search and advanced_search -->
+            <a href="https://images.google.com/search">Google Image Search</a>
+            <a href="https://www.google.com/advanced_search">Google Advanced Image Search</a>
+        </div>
+        <form action="https://www.google.com/search">
+            <!-- insert the image "google-logo.png" here with proper size -->
+            <img src="google-logo.png" alt="Google Logo" width="272">
+            <br>
+            
+            <input type="text" name="q">
+            <br>
+            <input type="submit" value="Google Search">
+            <input type="button" value="I'm Feeling Lucky" onclick="feelingLucky()">
+        </form>
+        <script>
+            function feelingLucky() {
+                const query = document.querySelector('input[name="q"]').value;
+                window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}&btnI=I`;
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,10 @@
+from django import forms
+from .models import Bid
+
+class BidForm(forms.ModelForm):
+    class Meta:
+        model = Bid
+        fields = ['bid_price']
+        labels = {
+            'bid_price': 'Your Bid'
+        }

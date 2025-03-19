@@ -1,0 +1,23 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    {% if user.is_authenticated %}
+        <a href="{% url 'watchlist' %}">View Your Watchlist</a>
+    {% endif %}
+    <div class="listings">
+        {% for listing in listings %}
+            <div class="listing">
+                <h3>{{ listing.title }}</h3>
+                <p>{{ listing.description }}</p>
+                <p>Current Price: ${{ listing.price }}</p>
+                {% if listing.image %}
+                    <img src="{{ listing.image }}" alt="{{ listing.title }}" style="max-width: 200px;">
+                {% endif %}
+                <!-- add the time is it created -->
+                <p>Created at: {{ listing.time }}</p>
+                <a href="{% url 'listing' listing.id %}">View Listing</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

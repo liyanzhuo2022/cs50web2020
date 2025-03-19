@@ -1,0 +1,84 @@
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <title>Advanced Search</title>
+        <style>
+            body {
+                display: flex;
+                justify-content: center; 
+                align-items: center; 
+                height: 100vh;
+                margin: 0;
+                font-family: Arial, sans-serif;
+                position: relative;
+            }
+
+            form {
+                text-align: left;
+                width: 300px;
+            }
+
+            label, input[type="text"] {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input[type="submit"],
+            input[type="button"] {
+                padding: 10px 20px;
+                border-radius: 25px;
+                border: 1px solid #ccc;
+                background-color: #4285F4; /* Google Blue */
+                color: white;
+                cursor: pointer;
+                text-align: center;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            input[type="submit"]:hover,
+            input[type="button"]:hover {
+                background-color: #357ae8; /* Darker blue on hover */
+            }
+
+            .links {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                text-align: right;
+            }
+
+            img {
+                display: block;
+                margin: 0 auto 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="links">
+            <!-- add a link to google search -->
+            <a href="https://www.google.com/search">Google Search</a>
+        </div>
+        <form action="https://www.google.com/advanced_search">
+            <!-- insert the image "google-logo.png" here with proper size -->
+            <img src="google-logo.png" alt="Google Logo" width="60">
+            <label for="all-words">Find pages with… “all these words:”</label>
+            <input type="text" id="all-words" name="as_q">
+            <label for="exact-phrase">Find pages with… “this exact word or phrase:”</label>
+            <input type="text" id="exact-phrase" name="as_epq">
+            <label for="any-words">Find pages with… “any of these words:”</label>
+            <input type="text" id="any-words" name="as_oq">
+            <label for="none-words">Find pages with… “none of these words:”</label>
+            <input type="text" id="none-words" name="as_eq">
+            <input type="submit" value="Advanced Search">
+            <input type="button" value="I'm Feeling Lucky" onclick="feelingLucky()">
+        </form>
+        <script>
+            function feelingLucky() {
+                const query = document.querySelector('input[name="as_q"]').value;
+                window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}&btnI=I`;
+            }
+        </script>
+    </body>
+</html>

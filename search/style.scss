@@ -1,0 +1,55 @@
+// This is a style.scss file for index.html and google_image.html
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+form {
+  text-align: center;
+}
+
+input[type="text"] {
+  width: 300px;
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+input[type="submit"],
+input[type="button"] {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover {
+  background-color: #e8e8e8;
+}
+
+a {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.links {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-align: right;
+}
+
+img {
+  display: block;
+  margin: 0 auto 20px;
+}
